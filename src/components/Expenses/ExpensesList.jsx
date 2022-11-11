@@ -1,24 +1,32 @@
+import { Component } from 'react';
+import { TodoContext } from '../../App';
 import ExpenseItem from './ExpenseItem'
 import './ExpensesList.css'
-
-const ExpensesList = ({ expenses }) => {
-	if (expenses.length === 0) {
-		return <h1 className='expenses-list__fallback'>No Expense Found</h1>
-	}
-	return (
-		<ul className='expenses-list'>
-			{expenses.map((expense, index) => {
+export default class ExpensesList extends Component {
+	static contextType = TodoContext;
+	render() {
+	  const item = this.context.currentExpenses()
+	  return (
+		<>
+		  {item.length === 0 ? (
+			<h1 className="expenses-list__fallback">No Expenses Found</h1>
+		  ) : (
+			<>
+			  {item.map((item) => {
+				  console.log(item.title);
 				return (
-					<ExpenseItem
-						key={index}
-						expenseTitle={expense.title}
-						expensePrice={expense.amount}
-						expenseDate={expense.date}
-					/>
-				)
-			})}
-		</ul>
-	)
-}
-
-export default ExpensesList
+				  <ExpenseItem
+					expenseTitle={item.title}
+					expensePrice={item.amount}
+					expenseDate={item.date}
+					id={item.id}
+					key={item.id}
+				  />
+				);
+			  })}
+			</>
+		  )}
+		</>
+	  );
+	}
+  }

@@ -1,20 +1,26 @@
+import { Component } from 'react';
+import { TodoContext } from '../../App';
 import './ExpensesFilter.css'
 
-const ExpensesFilter = ({ selectedYear, onChangeSelectedYear }) => {
-	return (
-		<div className='expenses-filter'>
-			<div className='expenses-filter__control'>
-				<label>Filter by year</label>
-				<select value={selectedYear} onChange={onChangeSelectedYear}>
-					<option value='All'>Select All</option>
-					<option value='2025'>2025</option>
-					<option value='2024'>2024</option>
-					<option value='2023'>2023</option>
-					<option value='2022'>2022</option>
-				</select>
-			</div>
+export default class ExpensesFilter extends Component {
+	static contextType = TodoContext;
+	render() {
+	  return (
+		<div className="expenses_filter">
+		  <div className="expenses_filter__control">
+			<label htmlFor="">Filter by year</label>
+			<select
+			  value={this.context.selectedYear}
+			  onChange={this.context.selectChange}
+			>
+			  <option value="All">Select All</option>
+			  <option value="2019">2019</option>
+			  <option value="2020">2020</option>
+			  <option value="2021">2021</option>
+			  <option value="2022">2022</option>
+			</select>
+		  </div>
 		</div>
-	)
-}
-
-export default ExpensesFilter
+	  );
+	}
+  }

@@ -1,21 +1,22 @@
+import { Component } from 'react';
 import './ChartBar.css'
-
-const ChartBar = ({ maxValue, label, value }) => {
-	let barFillHeight = '0%'
-	if (maxValue > 0) {
-		barFillHeight = Math.round((value / maxValue) * 100) + '%'
-	}
-	return (
-		<div className='chart-bar'>
-			<div className='chart-bar__inner'>
-				<div
-					className='chart-bar__fill'
-					style={{ height: barFillHeight }}
-				></div>
-			</div>
-			<div className='chart-bar__label'>{label}</div>
+export default class ChartBar extends Component {
+	render() {
+	  const { value, maxValue, label } = this.props;
+	  let barFillHeight = "0%";
+	  if (maxValue > 0) {
+		barFillHeight = Math.round((value / maxValue) * 100) + "%";
+	  }
+	  return (
+		<div className="char_bar">
+		  <div className="chart-bar__inner">
+			<div
+			  className="chart-bar__fill"
+			  style={{ height: barFillHeight }}
+			></div>
+		  </div>
+		  <div className="chart-bar__label">{label}</div>
 		</div>
-	)
-}
-
-export default ChartBar
+	  );
+	}
+  }

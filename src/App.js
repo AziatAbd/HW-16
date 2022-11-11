@@ -1,9 +1,9 @@
-import './App.css'
-import Expenses from './components/Expenses/Expenses'
-import NewExpense from './components/NewExpense/NewExpense'
-import { useState } from 'react'
+import "./App.css";
+import Expenses from "./components/Expenses/Expenses";
+import NewExpense from "./components/NewExpense/NewExpense";
+import {  Component, createContext } from "react";
 
-const expenses = [
+export const expenses = [
 	{
 		id: 'e1',
 		title: 'Toilet Paper',
@@ -25,21 +25,21 @@ const expenses = [
 	},
 ]
 
-function App() {
-	const [newExpenses, setNewExpenses] = useState(expenses)
+export const TodoContext = createContext({
+	expenses: [],
+  });
 
-	const addExpenseHandler = (expense) => {
-		setNewExpenses((prevExpense) => {
-			return [expense, ...prevExpense]
-		})
+  class App extends Component {
+	static contextType = TodoContext;
+  
+	render() {
+	  return (
+		<>
+		  <NewExpense />
+		  <Expenses />
+		</>
+	  );
 	}
-
-	return (
-		<div className='App'>
-			<NewExpense onAddExpense={addExpenseHandler} />
-			<Expenses expenses={newExpenses} />
-		</div>
-	)
-}
-
-export default App
+  }
+  
+  export default App;
